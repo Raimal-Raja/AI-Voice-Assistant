@@ -44,11 +44,7 @@ Microphone/audio and live cloud requests were not exercised. Set OPENAI_API_KEY 
 
 ### Validation
 
-Audit: 2026-10-08. Repository structure, setup instructions and description were reviewed. 3 existing Python files passed syntax checks; changed files and new regression tests were checked separately. Syntax checks do not establish full runtime correctness. External APIs, live scraping, GUI interaction, notebook training and production deployment were not comprehensively exercised.
-
-### Repository description
-
-The short GitHub description is provided in [REPOSITORY_DESCRIPTION.md](REPOSITORY_DESCRIPTION.md).
+Recorded checks from the previous maintenance review (2026-10-08): 3 existing Python files passed syntax checks; changed files and new regression tests were checked separately. Syntax checks do not establish full runtime correctness. External APIs, live scraping, GUI interaction, notebook training and production deployment were not comprehensively exercised.
 
 ### Contributions
 
