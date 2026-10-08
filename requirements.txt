@@ -1,0 +1,9 @@
+# Direct dependencies identified from source imports.
+# Use an isolated environment; these are not a locked or fully runtime-tested environment.
+SpeechRecognition
+pyttsx3
+requests
+openai
+gTTS
+pygame
+PyAudio

@@ -12,7 +12,7 @@ import os
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init() 
-newsapi = "Your API Here"
+newsapi = os.environ.get("NEWS_API_KEY", "")
 
 def speak(text):
     engine.say(text)
@@ -39,8 +39,7 @@ def speak_old(text):
     os.remove("temp.mp3") 
 
 def aiProcess(command):
-    client = OpenAI(api_key="Your API Here",
-    )
+    client = OpenAI()
 
     completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
@@ -62,12 +61,19 @@ def processCommand(c):
     elif "open linkedin" in c.lower():
         webbrowser.open("https://linkedin.com")
     elif c.lower().startswith("play"):
-        song = c.lower().split(" ")[1]
-        link = musicLibrary.music[song]
+        song = c.lower().partition(" ")[2].strip()
+        link = musicLibrary.music.get(song)
+        if not link:
+            speak("Please name a song available in the music library.")
+            return
         webbrowser.open(link)
 
     elif "news" in c.lower():
-        r = requests.get(f"https://newsapi.org/v2/top-headlines?country=in&apiKey={newsapi}")
+        if not newsapi:
+            speak("Set NEWS_API_KEY to enable news headlines.")
+            return
+        r = requests.get("https://newsapi.org/v2/top-headlines",
+                         params={"country": "in", "apiKey": newsapi}, timeout=15)
         if r.status_code == 200:
             # Parse the JSON response
             data = r.json()
